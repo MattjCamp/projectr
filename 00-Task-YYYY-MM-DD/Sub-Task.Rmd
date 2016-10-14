@@ -20,7 +20,7 @@ f <- read_csv("data-sources/example_data.csv")
 
 ```
 
-`r knitr::kable(f)` 
+`r knitr::kable(head(f))` 
 
 ## Replicate Data Pull
 
@@ -30,7 +30,7 @@ q <- data.frame(list(Test = "SAT", Year = "2015", N = "1724980"))
 
 ```
 
-`r knitr::kable(q)` 
+`r knitr::kable(head(q))` 
 
 ## QC Analysis
 
