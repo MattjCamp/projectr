@@ -1,0 +1,58 @@
+---
+title: "Sub-Task"
+output:
+  html_document:
+    css: ../style.css
+    toc: yes
+---
+
+```{r warning = FALSE, message = FALSE, echo = FALSE}
+
+source("functions/load.code.R")
+
+```
+
+## Read Fulfiller Data In
+
+```{r warning = FALSE, message = FALSE, echo = TRUE}
+
+f <- read_csv("data-sources/example_data.csv")
+
+```
+
+`r knitr::kable(f)` 
+
+## Replicate Data Pull
+
+```{r warning = FALSE, message = FALSE, echo = TRUE}
+
+q <- data.frame(list(Test = "SAT", Year = "2015", N = "1724980"))
+
+```
+
+`r knitr::kable(q)` 
+
+## QC Analysis
+
+```{r warning = FALSE, message = FALSE, echo = TRUE}
+
+f <- datapoints(f, 1:2)
+q <- datapoints(q, 1:2)
+dc <- compare_datapoints(f, q)
+
+```
+
+`r present_qc_match_report(dc, "QC Match")`
+
+# NOTES
+
+>**NOTE** `f` is fulfiller dataset and `q` is QC analyst dataset.
+
+>**NOTE** This document was created on `r Sys.time()` by `r Sys.getenv("USERNAME")`.
+
+```{r warning = FALSE, message = FALSE, echo = FALSE}
+
+source(sprintf("%s/functions/dispose.code.R",
+               dirname(getwd())))
+
+```

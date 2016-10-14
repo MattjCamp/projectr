@@ -1,0 +1,41 @@
+
+#status_passed {
+	background-color: darkseagreen;
+	margin-top:5px;
+	margin-bottom:5px;
+	padding: 10pt;
+	font-size: 115%;
+}
+
+#status_failed {
+	background-color: indianred;
+	margin-top:5px;
+	margin-bottom:5px;
+	padding: 10pt;
+	font-size: 115%;
+}
+
+table {
+    margin-left:auto; 
+    margin-right:auto;
+  }
+
+#status_passed tr:nth-child(even) {
+    background-color: #b5d8a6;
+}
+
+#status_failed tr:nth-child(even) {
+    background-color: #d39696;
+}
+
+th {
+  padding-top:5pt;
+  padding-right:2pt;
+  padding-left:2pt;
+  font-size: 11pt;
+}
+
+td {
+  padding:2pt;
+  font-size:9pt;
+}
