@@ -33,5 +33,5 @@ install_github('mattjcamp/datapointsr','mattjcamp',
 
 # LOCAL PACKAGES (POINT TO BRANCH IF NECESSARY)
 
-install_git("C:/Users/mcampbell/Dropbox/Work/CB/Code/Repository/cohortr/",
-            branch = "A-0-4-4")
+install_git("C:/Users/mcampbell/CB/Code/Repository/cohortr/",
+            branch = "A-0-8-2")
