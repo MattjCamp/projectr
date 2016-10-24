@@ -10,7 +10,6 @@ install.packages("reshape")
 install.packages("stringr")
 install.packages("sqldf")
 install.packages("xlsx")
-install.packages("xtable")
 install.packages("dplyr")
 install.packages("devtools")
 
@@ -34,4 +33,4 @@ install_github('mattjcamp/datapointsr','mattjcamp',
 # LOCAL PACKAGES (POINT TO BRANCH IF NECESSARY)
 
 install_git("C:/Users/mcampbell/CB/Code/Repository/cohortr/",
-            branch = "A-0-8-2")
+            branch = "A-0-8-3")
