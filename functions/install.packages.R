@@ -4,11 +4,15 @@
 
 # RUN THIS TO INSTALL PACKAGES(ESPECIALLY AFTER NEW R INSTALL)
 
+install.packages("base64enc")
+install.packages("markdown")
 install.packages("knitr")
-install.packages("compare")
-install.packages("sqldf")
 install.packages("tidyverse")
-install.packages("devtools")
+install.packages("sqldf")
+install.packages("data.table")
+
+# install.packages("compare")
+# install.packages("devtools")
 
 # install.packages("reshape")
 # install.packages("xlsx")
@@ -20,7 +24,7 @@ install.packages("devtools")
 
 library(devtools)
 
-# GITHUB 
+# GITHUB
 # POINT TO SPECIFIC COMMIT, OMIT ref TO POINT TO MOST RECENT
 
 install_github('mattjcamp/overridesr','mattjcamp')

@@ -4,6 +4,8 @@ output:
   html_document:
     css: ../style.css
     toc: yes
+  pdf_document:
+    toc: yes
 ---
 
 ```{r warning = FALSE, message = FALSE, echo = FALSE}
