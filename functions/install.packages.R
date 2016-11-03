@@ -4,21 +4,12 @@
 
 # RUN THIS TO INSTALL PACKAGES(ESPECIALLY AFTER NEW R INSTALL)
 
+install.packages("devtools")
 install.packages("base64enc")
 install.packages("markdown")
 install.packages("knitr")
 install.packages("tidyverse")
-install.packages("sqldf")
 install.packages("data.table")
-
-# install.packages("compare")
-# install.packages("devtools")
-
-# install.packages("reshape")
-# install.packages("xlsx")
-# install.packages("dplyr")
-# install.packages("stringr")
-
 
 # VERSIONS FOR THIS PROJECT
 
@@ -27,11 +18,11 @@ library(devtools)
 # GITHUB
 # POINT TO SPECIFIC COMMIT, OMIT ref TO POINT TO MOST RECENT
 
-install_github('mattjcamp/overridesr','mattjcamp')
+install_github('mattjcamp/cohortr','mattjcamp')
 
 # LOCAL PACKAGES (POINT TO BRANCH IF NECESSARY)
 
-install_git("C:/Users/mcampbell/CB/Code/Repository/cohortr/",
+install_git("cohortr/",
             branch = "A-0-8-3")
 
 
