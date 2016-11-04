@@ -14,21 +14,33 @@ source("functions/load.code.R")
 
 ```
 
+This is an example of a QC analysis. We want to see if the
+**quakes.csv** file that we have matches the `quakes` dataset
+that is built into R.
+
 ## Read Fulfiller Data In
 
 ```{r warning = FALSE, message = FALSE, echo = TRUE}
 
-f <- read_csv("data-sources/example_data.csv")
+f <- 
+  read_csv("data-sources/quakes.csv") %>% 
+  group_by(stations) %>% 
+  summarize(n = length(stations),
+            mean_mag = mean(mag))
 
 ```
 
 `r knitr::kable(head(f))` 
 
-## Replicate Data Pull
+## Replicate
 
 ```{r warning = FALSE, message = FALSE, echo = TRUE}
 
-q <- data.frame(list(Test = "SAT", Year = "2015", N = "1724980"))
+q <- 
+  quakes %>% 
+  group_by(stations) %>% 
+  summarize(n = length(stations),
+            mean_mag = mean(mag))
 
 ```
 
@@ -38,19 +50,13 @@ q <- data.frame(list(Test = "SAT", Year = "2015", N = "1724980"))
 
 ```{r warning = FALSE, message = FALSE, echo = TRUE}
 
-f <- long(f, 1:2)
-q <- as.data.points(q, 1:2)
+f <- long(f, 1)
+q <- long(q, 1)
 dp <- data_points(f, q)
-datapointsr::match_category_metadata(dp)
-
-# See what a matching version would look like:
-
-dp <- data_points(f, f)
-match_values(dp)
 
 ```
 
-`r html_matching_report(dp, "QC Match")`
+`r html_matching_report(dp, "QC Match Quakes")`
 
 # NOTES
 
