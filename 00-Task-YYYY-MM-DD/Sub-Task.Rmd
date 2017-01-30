@@ -14,49 +14,72 @@ source("functions/load.code.R")
 
 ```
 
-This is an example of a QC analysis. We want to see if the
-**quakes.csv** file that we have matches the `quakes` dataset
-that is built into R.
+This is an example of a QC analysis which is one of many types
+of tasks that could be part of a project. In this example, I am going to
+do a QC Analysis of a pretend data pull that a pretend co-worker did for our
+boss.
+
+Here are the steps.
 
 ## Read Fulfiller Data In
 
 ```{r warning = FALSE, message = FALSE, echo = TRUE}
 
 f <- 
-  read_csv("data-sources/quakes.csv") %>% 
-  group_by(stations) %>% 
-  summarize(n = length(stations),
-            mean_mag = mean(mag))
+  read_csv("data-sources/enrolled_by_gender.csv")
 
 ```
 
-`r knitr::kable(head(f))` 
+`r knitr::kable(f)` 
 
 ## Replicate
+
+Try to replicate what the fulfiller did using rules that we trust. The first
+step is to get a connection to the data source that we use. For this example, we
+are looking at the WICHE database that is included in the **dbr** package:
+
+```{r warning = FALSE, message = FALSE, echo = TRUE}
+
+db_file <- system.file("dbr_resources",
+                       "example_database.db",
+                       package = "dbr")
+
+conn <- init_sqlite(db_file)
+
+```
+
+Next, we will use our requirements to attempt to recreate what we expect that
+the fulfiller did. We were told to get the public school enrollments for five
+years starting in 2010 by gender.
 
 ```{r warning = FALSE, message = FALSE, echo = TRUE}
 
 q <- 
-  quakes %>% 
-  group_by(stations) %>% 
-  summarize(n = length(stations),
-            mean_mag = mean(mag))
-
+  "select location, year, gender, n
+   from wiche_projections_2013
+   where grade in ('graduates') 
+         and year in (2010,2011,2012,2013,2014)
+         and gender not in ('all')
+         and race in ('all')
+         and sector in ('public')
+         and location in ('us')" %>% 
+  pull_data(conn)
+  
 ```
 
-`r knitr::kable(head(q))` 
+`r knitr::kable(q)` 
 
 ## QC Analysis
 
 ```{r warning = FALSE, message = FALSE, echo = TRUE}
 
-f <- long(f, 1)
-q <- long(q, 1)
+f <- long(f, 2:3)
+q <- long(q, 2:3)
 dp <- data_points(f, q)
 
 ```
 
-`r html_matching_report(dp, "QC Match Quakes")`
+`r html_matching_report(dp, "Match WICHE Pull")`
 
 # NOTES
 
