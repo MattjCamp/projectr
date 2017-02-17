@@ -20,6 +20,11 @@ table {
     margin-right:auto;
   }
 
+img{
+    display: block;
+    margin: auto;
+}
+
 #status_passed tr:nth-child(even) {
     background-color: #b5d8a6;
 }

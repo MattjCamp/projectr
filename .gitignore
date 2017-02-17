@@ -1,16 +1,36 @@
-# History files
+# HISTORY FILES
+
 .Rhistory
 .Rapp.history
 
-# Example code in package build process
+# R
+
+.RData
+
+# EXAMPLE CODE
+
 *-Ex.R
-# RStudio files
+
+# RSTUDIO
+
 .Rproj.user/
-# produced vignettes
+.Rproj.user
+packrat/lib*/
+*.utf8.md
+*.knit.md
+/*.Rcheck/
+/*.tar.gz
+/*_cache/
+/cache/
+
+# VIGNETTES
+
 vignettes/*.html
 vignettes/*.pdf
-.Rproj.user
-functions/do_not_commit.R
-packrat/lib*/
-#cache databases
+
+# BIG DATA SOURCES
+
 *.db
+*.csv
+*.rdata
+*.sas7bdat
