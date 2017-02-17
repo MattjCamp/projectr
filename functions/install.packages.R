@@ -18,9 +18,12 @@ library(devtools)
 # GITHUB
 # POINT TO SPECIFIC COMMIT, OMIT ref TO POINT TO MOST RECENT
 
+install_github('mattjcamp/datapointsr','mattjcamp')
+install_github('mattjcamp/coderr','mattjcamp')
 install_github('mattjcamp/cohortr','mattjcamp')
+install_github('mattjcamp/dbr','mattjcamp')
 
-# LOCAL PACKAGES (POINT TO BRANCH IF NECESSARY)
+# LOCAL GIT PACKAGES (POINT TO BRANCH IF NECESSARY)
 
 install_git("cohortr/",
             branch = "A-0-8-3")

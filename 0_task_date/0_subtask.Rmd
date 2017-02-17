@@ -1,5 +1,5 @@
 ---
-title: "Sub-Task"
+title: "SUBTASK"
 output:
   html_document:
     css: ../style.css
@@ -14,29 +14,36 @@ source("functions/load.code.R")
 
 ```
 
-This is an example of a QC analysis which is one of many types
-of tasks that could be part of a project. In this example, I am going to
-do a QC Analysis of a pretend data pull that a pretend co-worker did for our
-boss.
+# Overview
 
-Here are the steps.
+This is an example of a QC Analysis that is meant to be used as a quick
+start template. The problem here is that the fulfiller analyst created a statistical
+table that shows enrollments over a ten year period broken out by gender. My task is
+to pull the same data from our database (included in the `dbr` package) by applying
+our rules so that I can compare our two datasets and to verify the analysis.
+
+# QC Analysis
 
 ## Read Fulfiller Data In
 
 ```{r warning = FALSE, message = FALSE, echo = TRUE}
 
 f <- 
-  read_csv("data-sources/enrolled_by_gender.csv")
+  read_excel("data-sources/enrolled_by_gender.xlsx",
+             sheet = "data")
+
+# MINOR CLEANING
+
+f <- f %>% mutate(year = as.integer(year),
+                  n = as.integer(n))
+
+f
 
 ```
 
-`r knitr::kable(f)` 
+## Replicate Statistical Table
 
-## Replicate
-
-Try to replicate what the fulfiller did using rules that we trust. The first
-step is to get a connection to the data source that we use. For this example, we
-are looking at the WICHE database that is included in the **dbr** package:
+### Get Database Connection
 
 ```{r warning = FALSE, message = FALSE, echo = TRUE}
 
@@ -48,9 +55,7 @@ conn <- init_sqlite(db_file)
 
 ```
 
-Next, we will use our requirements to attempt to recreate what we expect that
-the fulfiller did. We were told to get the public school enrollments for five
-years starting in 2010 by gender.
+### Pull Enrollment Data
 
 ```{r warning = FALSE, message = FALSE, echo = TRUE}
 
@@ -65,11 +70,11 @@ q <-
          and location in ('us')" %>% 
   pull_data(conn)
   
+q
+
 ```
 
-`r knitr::kable(q)` 
-
-## QC Analysis
+## Match Datasets
 
 ```{r warning = FALSE, message = FALSE, echo = TRUE}
 
@@ -79,13 +84,14 @@ dp <- data_points(f, q)
 
 ```
 
-`r html_matching_report(dp, "Match WICHE Pull")`
+`r html_matching_report(dp, "Exact Match WICHE Enrollments")`
 
-# NOTES
+# Conclusion
 
->**NOTE** `f` is fulfiller dataset and `q` is QC analyst dataset.
+Since we verified the data pull and the results look reasonable I believe that this
+analysis is correct.
 
->**NOTE** This document was created on `r Sys.time()` by `r Sys.getenv("USERNAME")`.
+`r Sys.getenv("USERNAME")`, `r Sys.time()`
 
 ```{r warning = FALSE, message = FALSE, echo = FALSE}
 
