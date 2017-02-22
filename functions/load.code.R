@@ -4,6 +4,7 @@ options(stringsAsFactors = FALSE)
 
 library(tidyverse)
 library(readxl)
+library(stringr)
 library(datapointsr)
 library(coderr)
 library(cohortr)
