@@ -1,0 +1,111 @@
+---
+title: "QC Example (WICHE)"
+output:
+  html_document:
+    css: ../style.css
+    toc: yes
+  pdf_document:
+    toc: yes
+---
+
+```{r warning = FALSE, message = FALSE, echo = FALSE}
+
+source("functions/load.code.R")
+
+```
+
+# Overview
+
+Here is an example of how to use [**datapointsr**](https://github.com/MattjCamp/wicher) 
+to do a QC analysis. The content is from WICHE via the [**wicher**](https://github.com/MattjCamp/wicher) package.
+
+I will use the data in wicher to build the two datasets that we want to
+compare. BTW this part is going to be a little janky because I have to sort of artifically
+create wide datasets for both roles (the Fulfiller and QC Analyst).
+
+First, create the source statistical table:
+
+
+```{r warning = FALSE, message = FALSE, echo = TRUE}
+
+library(wicher)
+
+d <- wiche_graduate_projections %>% 
+  filter(year %in% 2001:2010,
+         grade == "g",
+         race == "all",
+         location == "us") %>% 
+  mutate(variable = sprintf("count_%s", sector),
+         value = n) %>% 
+  select(year, location, variable, value) %>% 
+  wide()
+
+knitr::kable(d)
+
+```
+
+# QC Analysis Examples
+
+## Category & Content Are Off
+
+```{r warning = FALSE, message = FALSE, echo = TRUE}
+
+f <- d
+f[3, 4] <- f[3, 4] + sample(1:100, 1)
+f[7, 5] <- f[7, 5] + sample(1:1000, 1)
+f[8, 2] <- "usa"
+
+q <- d
+
+f <- f %>% long(1:2)
+q <- q %>% long(1:2)
+dp <- data_points(f, q)
+m <- match_data_points(dp)
+
+```
+
+`r show_as_html(m, "Category & Content Are Off")`
+
+## Category Is Missing, But Content Is OK
+
+```{r warning = FALSE, message = FALSE, echo = TRUE}
+
+f <- d
+q <- d
+f$location <- NULL
+f <- f %>% long(1)
+q <- q %>% long(1:2)
+dp <- data_points(f, q)
+m <- match_data_points(dp)
+match_data_points <- m
+
+```
+
+`r show_as_html(m, "Category Is Off, But Content Is OK")`
+
+
+## Perfect Match
+
+```{r warning = FALSE, message = FALSE, echo = TRUE}
+
+f <- d
+q <- d
+f <- f %>% long(1:2)
+q <- q %>% long(1:2)
+dp <- data_points(f, q)
+m <- match_data_points(dp)
+
+```
+
+`r show_as_html(m, "Perfect Match")`
+
+# Conclusion
+
+`r Sys.getenv("USERNAME")`, `r Sys.time()`
+
+```{r warning = FALSE, message = FALSE, echo = FALSE}
+
+source(sprintf("%s/functions/dispose.code.R",
+               dirname(getwd())))
+
+```
