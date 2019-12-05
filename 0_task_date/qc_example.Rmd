@@ -30,7 +30,7 @@ First, create the source statistical table:
 
 library(wicher)
 
-d <- wiche_graduate_projections %>% 
+d <- wiche_enrollments %>% 
   filter(year %in% 2001:2010,
          grade == "g",
          race == "all",
@@ -106,6 +106,6 @@ m <- match_data_points(dp)
 ```{r warning = FALSE, message = FALSE, echo = FALSE}
 
 source(sprintf("%s/functions/dispose.code.R",
-               dirname(getwd())))
+               here::here()))
 
 ```

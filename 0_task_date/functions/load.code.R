@@ -1,8 +1,11 @@
 
 source(sprintf("%s/functions/load.code.R",
-               dirname(getwd())))
+               here::here()))
 
 source(sprintf("%s/functions/functions.R",
-               getwd()))
+               here::here()))
+
 
 # LOAD TASK SPECIFIC OVERRIDES/EXTENSION FILES HERE
+
+log <- "hello"
