@@ -1,0 +1,33 @@
+---
+title: "TASK"
+output:
+  html_document:
+    css: ../style.css
+    toc: yes
+  pdf_document:
+    toc: yes
+---
+
+```{r warning = FALSE, message = FALSE, echo = FALSE}
+
+source(sprintf("%s/%s", here::here(), "functions/load.code.R"))
+
+```
+
+# Overview
+
+# Procedure
+
+```{r warning = FALSE, message = FALSE, echo = TRUE}
+
+
+```
+
+`r Sys.getenv("USERNAME")`, `r Sys.time()`
+
+```{r warning = FALSE, message = FALSE, echo = FALSE}
+
+source(sprintf("%s/functions/dispose.code.R",
+               here::here()))
+
+```

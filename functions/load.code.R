@@ -9,6 +9,8 @@ library(datapointsr)
 library(coderr)
 library(dbr)
 
+datadir_proj <- sprintf("%s/%s", here::here(), "data")
+
 source(sprintf("%s/functions/functions.R",
                here::here()))
 

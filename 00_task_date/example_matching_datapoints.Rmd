@@ -1,5 +1,5 @@
 ---
-title: "QC Example (WICHE)"
+title: "Matching WICHE Datapoints"
 output:
   html_document:
     css: ../style.css
@@ -10,7 +10,7 @@ output:
 
 ```{r warning = FALSE, message = FALSE, echo = FALSE}
 
-source("functions/load.code.R")
+source(sprintf("%s/%s", here::here(), "functions/load.code.R"))
 
 ```
 
